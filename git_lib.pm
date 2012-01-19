@@ -99,6 +99,32 @@ sub takeCommitList {
     return @sList;
 }
 #------------------------------------------------------
+# takeDiffList
+#------------------------------------------------------
+sub takeDiffList {
+    my ($rev)=@_;
+
+    my @list=readpipe(qq{git diff --cached --numstat $rev});
+
+    my @sList=();
+    for my $i (@list)
+    {
+        chomp($i);
+        my ($del,$add,$file)=split(/\s+/,$i,3);
+
+        push(@sList,
+        {
+           BINARY => undef,
+           FILE => $file,
+           INDEX => "(-$del,+$add)",
+           INDEX_ADDDEL => "create",
+           VALUE => "",
+        });
+
+    }
+    return @sList;
+}
+#------------------------------------------------------
 # commit
 #------------------------------------------------------
 sub commit
