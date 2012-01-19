@@ -57,13 +57,10 @@ sub diff_cmd {
 
     my @mods = git_lib::takeDiffList($revision);
 
-#    print dump(\@mods),"\n";
-
     my @update = git_menu::list_and_choose({ PROMPT => 'diff',
     			       HEADER => "Select file:", 
     			       IMMEDIATE => 1 
-    			       },
-    			     @mods);
+    			       },    @mods);
 
     if (@update) {
         my $file=$update[0]->{FILE};
@@ -77,15 +74,12 @@ sub diff_cmd {
 #------------------------------------------------------
 sub revert_cmd {
 
-    my @mods = takeDiffList($revision);
-
-#    print dump(\@mods),"\n";
+    my @mods = git_lib::takeDiffList($revision);
 
     my @update = git_menu::list_and_choose({ PROMPT => 'revert',
     			       HEADER => "Select file:", 
     			       IMMEDIATE => 1 
-    			       },
-    			     @mods);
+    			       },    @mods);
 
     if (@update) {
         my $file=$update[0]->{FILE};
@@ -96,9 +90,7 @@ sub revert_cmd {
 
         return unless $ans eq "y";
 
-
         system(qw{git checkout}, $revision, "--", $file);
-
     }
 
     return;
@@ -135,6 +127,7 @@ sub main
              if ($@) {
                  print "$@";
              }
+             print "-----------------\n";
          }
     }
 }
