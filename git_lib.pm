@@ -146,7 +146,7 @@ sub commit
 
 #    print "cV1=$cV1\n";
 
-    if ($cV1==$v1)
+    if ($cV1 eq $v1)
     {
        $v2++;
     }
