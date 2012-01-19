@@ -51,37 +51,11 @@ sub set_ver {
     return;
 }
 #------------------------------------------------------
-# takeDiffList
-#------------------------------------------------------
-sub takeDiffList {
-    my ($rev)=@_;
-
-    my @list=readpipe(qq{git diff --cached --numstat $rev});
-
-    my @sList=();
-    for my $i (@list)
-    {
-        chomp($i);
-        my ($del,$add,$file)=split(/\s+/,$i,3);
-
-        push(@sList,
-        {
-           BINARY => undef,
-           FILE => $file,
-           INDEX => "(-$del,+$add)",
-           INDEX_ADDDEL => "create",
-           VALUE => "",
-        });
-
-    }
-    return @sList;
-}
-#------------------------------------------------------
 # diff_cmd
 #------------------------------------------------------
 sub diff_cmd {
 
-    my @mods = takeDiffList($revision);
+    my @mods = git_lib::takeDiffList($revision);
 
 #    print dump(\@mods),"\n";
 
