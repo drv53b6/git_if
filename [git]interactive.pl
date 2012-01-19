@@ -103,7 +103,10 @@ sub revert_cmd {
 #------------------------------------------------------
 sub commit_cmd
 {
-    git_lib::commit();
+    print "comment for commit:\n";
+    my $ans=<STDIN>;chomp($ans);
+
+    git_lib::commit($ans);
     return;
 }
 #------------------------------------------------------
