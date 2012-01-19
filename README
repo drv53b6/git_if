@@ -9,7 +9,6 @@ copy files:
     fileLib.pm
     git_lib.pm
     git_menu.pm
-    git_push.bat
     git_settings.pm
 to u progect derictory
 
