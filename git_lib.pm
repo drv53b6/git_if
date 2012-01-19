@@ -129,6 +129,12 @@ sub takeDiffList {
 #------------------------------------------------------
 sub commit
 {
+
+    unless (-d(".git"))
+    {
+         system("git","init");
+    }
+
     my $lastC=lastCommit();
 #    print "[$lastC]\n";
     my $comment=getComment($lastC);
