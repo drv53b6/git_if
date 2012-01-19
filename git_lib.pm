@@ -63,7 +63,7 @@ sub getVersion {
 sub gitCommit {
     my ($v1,$v2,$text)=@_;
 
-    system("git", "commit", "-a", "-m", "$text [version=$v1|$v2]");
+    system("git", "commit", "-a", "-m", "${text}[version=$v1|$v2]");
 
     return;
 }
