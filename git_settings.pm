@@ -19,7 +19,6 @@ sub controlArea {
     system("git", "add", "*.pl");
     system("git", "add", "*.pm");
     system("git", "add", "*.txt");
-    system("git", "add", "*.bat");
     system("git", "add", "README");
 
     return;
