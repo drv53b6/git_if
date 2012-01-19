@@ -5,10 +5,9 @@
 
 =cut
 #------------------------------------------------------
-#use Data::Dump qw(dump);
-#    use File::Copy;
     use strict;
     use fileLib;
+    use git_settings;
 #------------------------------------------------------
     package git_lib;
 
@@ -20,14 +19,6 @@ sub null {
 
 
     return $par;
-}
-#------------------------------------------------------
-# getDirVersion
-#------------------------------------------------------
-sub getDirVersion {
-
-    my $ver=fileLib::fileToStr('[git]version.txt');
-    return $ver;
 }
 #------------------------------------------------------
 # lastCommit
@@ -61,7 +52,7 @@ sub getVersion {
 
     my ($comment)=( $comment =~ m{\[version=(.+?)\]}m);
 
-    my ($v1,$v2)=split(/\./,$comment,2);
+    my ($v1,$v2)=split(/|/,$comment,2);
 
 
     return ($v1,$v2);
@@ -72,13 +63,9 @@ sub getVersion {
 sub gitCommit {
     my ($v1,$v2)=@_;
 
-    system("git", "add", "*.h");
-    system("git", "add", "*.cc");
-    system("git", "add", "*.pl");
-    system("git", "add", "*.pm");
-    system("git", "add", "*.txt");
+    git_settings::controlArea();
 
-    system("git", "commit", "-a", "-m", "[version=$v1.$v2]");
+    system("git", "commit", "-a", "-m", "[version=$v1|$v2]");
 
     return;
 }
@@ -117,15 +104,15 @@ sub takeCommitList {
 sub commit
 {
     my $lastC=lastCommit();
-    print "[$lastC]\n";
+#    print "[$lastC]\n";
     my $comment=getComment($lastC);
-    print "c=$comment\n";
+#    print "c=$comment\n";
     my ($v1,$v2)=getVersion($comment);
-    print "v=($v1,$v2)\n";
+#    print "v=($v1,$v2)\n";
 
-    my $cV1=getDirVersion();
+    my $cV1=git_settings::getVersion();
 
-    print "cV1=$cV1\n";
+#    print "cV1=$cV1\n";
 
     if ($cV1==$v1)
     {

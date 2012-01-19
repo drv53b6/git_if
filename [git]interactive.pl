@@ -5,12 +5,11 @@
 
 =cut
 #------------------------------------------------------
-use Data::Dump qw(dump);
-#    use File::Copy;
     use strict;
     use fileLib;
     use git_lib;
     use git_menu;
+    use git_settings;
 
     use vars qw($revision);
 
@@ -166,5 +165,5 @@ sub main
     }
 }
 #------------------------------------------------------
-$ENV{PATH} .= q{;F:\cygwin\usr\local\bin;F:\cygwin\bin;F:\cygwin\bin};
+git_settings::setEnv();
 main(@ARGV);

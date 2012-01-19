@@ -5,18 +5,15 @@
 
 =cut
 #------------------------------------------------------
-#use Data::Dump qw(dump);
-#    use File::Copy;
     use strict;
-    use fileLib;
     use git_lib;
+    use git_settings;
 
 #------------------------------------------------------
 # null
 #------------------------------------------------------
 sub null {
     my ($par)=@_;
-
 
     return $par;
 }
@@ -25,10 +22,9 @@ sub null {
 #------------------------------------------------------
 sub main
 {
-
     git_lib::commit();
     return;
 }
 #------------------------------------------------------
-$ENV{PATH} .= q{;F:\cygwin\usr\local\bin;F:\cygwin\bin;F:\cygwin\bin};
+git_settings::setEnv();
 main(@ARGV);
