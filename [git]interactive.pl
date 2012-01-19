@@ -99,18 +99,27 @@ sub revert_cmd {
     return;
 }
 #------------------------------------------------------
+# commit_cmd
+#------------------------------------------------------
+sub commit_cmd
+{
+    git_lib::commit();
+    return;
+}
+#------------------------------------------------------
 # main
 #------------------------------------------------------
 sub main
 {
 
-    git_lib::commit();
+#    git_lib::commit();
     $revision=git_lib::lastCommit();
 
     my @cmd = (
                [ 'set_ver', \&set_ver, ],
                [ 'diff', \&diff_cmd, ],
                [ 'revert', \&revert_cmd, ],
+               [ 'commit', \&commit_cmd, ],
                [ 'quit', \&quit_cmd, ],
    );
     while (1) {
