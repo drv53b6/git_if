@@ -14,8 +14,6 @@
 #------------------------------------------------------
 sub controlArea {
 
-    system("git", "rm", "--cached", "*");
-
     system("git", "add", "*.h");
     system("git", "add", "*.cc");
     system("git", "add", "*.pl");

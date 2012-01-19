@@ -63,6 +63,7 @@ sub getVersion {
 sub gitCommit {
     my ($v1,$v2)=@_;
 
+    system("git", "rm", "--cached", "*");
     git_settings::controlArea();
 
     system("git", "commit", "-a", "-m", "[version=$v1|$v2]");
