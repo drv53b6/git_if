@@ -134,5 +134,5 @@ sub main
     }
 }
 #------------------------------------------------------
-git_settings::setEnv();
+git_lib::init();
 main(@ARGV);

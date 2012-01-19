@@ -63,9 +63,6 @@ sub getVersion {
 sub gitCommit {
     my ($v1,$v2)=@_;
 
-    system("git", "rm", "--cached", "*");
-    git_settings::controlArea();
-
     system("git", "commit", "-a", "-m", "[version=$v1|$v2]");
 
     return;
@@ -131,11 +128,6 @@ sub takeDiffList {
 sub commit
 {
 
-    unless (-d(".git"))
-    {
-         system("git","init");
-    }
-
     my $lastC=lastCommit();
 #    print "[$lastC]\n";
     my $comment=getComment($lastC);
@@ -159,6 +151,23 @@ sub commit
     print "v=($cV1,$v2)\n";
 
     gitCommit($cV1,$v2);
+
+    return;
+}
+#------------------------------------------------------
+# init
+#------------------------------------------------------
+sub init {
+
+    git_settings::setEnv();
+
+    unless (-d(".git"))
+    {
+         system("git","init");
+    }
+
+    system("git", "rm", "--cached", "*");
+    git_settings::controlArea();
 
     return;
 }

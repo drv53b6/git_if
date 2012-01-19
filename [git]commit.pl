@@ -27,5 +27,5 @@ sub main
     return;
 }
 #------------------------------------------------------
-git_settings::setEnv();
+git_lib::init();
 main(@ARGV);
