@@ -61,9 +61,9 @@ sub getVersion {
 # gitCommit
 #------------------------------------------------------
 sub gitCommit {
-    my ($v1,$v2)=@_;
+    my ($v1,$v2,$text)=@_;
 
-    system("git", "commit", "-a", "-m", "[version=$v1|$v2]");
+    system("git", "commit", "-a", "-m", "$text [version=$v1|$v2]");
 
     return;
 }
@@ -127,6 +127,7 @@ sub takeDiffList {
 #------------------------------------------------------
 sub commit
 {
+    my ($text)=@_;
 
     my $lastC=lastCommit();
 #    print "[$lastC]\n";
@@ -150,7 +151,7 @@ sub commit
 
     print "v=($cV1,$v2)\n";
 
-    gitCommit($cV1,$v2);
+    gitCommit($cV1,$v2,$text);
 
     return;
 }
