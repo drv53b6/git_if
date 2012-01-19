@@ -64,6 +64,7 @@ sub diff_cmd {
     			       },    @mods);
 
     if (@update) {
+        print "-----------------\n";
         my $file=$update[0]->{FILE};
         system(qw{git diff --cached}, $revision, "--", $file);
     }
@@ -83,6 +84,7 @@ sub revert_cmd {
     			       },    @mods);
 
     if (@update) {
+        print "-----------------\n";
         my $file=$update[0]->{FILE};
         system(qw{git diff --cached}, $revision, "--", $file);
 
@@ -128,7 +130,6 @@ sub main
              if ($@) {
                  print "$@";
              }
-             print "-----------------\n";
          }
     }
 }
