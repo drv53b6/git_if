@@ -52,7 +52,7 @@ sub getVersion {
 
     my ($comment)=( $comment =~ m{\[version=(.+?)\]}m);
 
-    my ($v1,$v2)=split(/|/,$comment,2);
+    my ($v1,$v2)=split(/\|/,$comment,2);
 
 
     return ($v1,$v2);
