@@ -1,6 +1,6 @@
 easy interface to git version control system
 
-stap 1
+step 1
 
 copy files:
     [git]commit.pl

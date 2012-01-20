@@ -1,7 +1,30 @@
 #------------------------------------------------------
 =head1 NAME
-
+well maked git user interface easy to use windows linux
 =head1 SYNOPSIS
+step 1
+
+copy files:
+    [git]commit.pl
+    [git]interactive.pl
+    [git]version.txt
+    fileLib.pm
+    git_lib.pm
+    git_menu.pm
+    git_settings.pm
+to u progect derictory
+
+step 2
+
+edit file "git_settings.pm"
+
+step 3
+
+use 
+    [git]commit.pl
+    [git]interactive.pl
+for save progect state
+and for selective restore files from progect history
 
 =cut
 #------------------------------------------------------
