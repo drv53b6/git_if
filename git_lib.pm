@@ -96,8 +96,6 @@ sub gitCommit {
 #------------------------------------------------------
 sub takeCommitList {
 
-
-#    my @list=readpipe(q{git log "--pretty=oneline" --max-count 21});
     my @list=readpipe(q{git log "--pretty=%H %s - %ar" --max-count 21});
 
     my @sList=();
