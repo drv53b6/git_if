@@ -97,7 +97,7 @@ sub gitCommit {
 sub takeCommitList {
 
 
-    my @list=readpipe(q{git log "--pretty=oneline" --max-count 25});
+    my @list=readpipe(q{git log "--pretty=oneline" --max-count 21});
 
     my @sList=();
     for my $i (@list)
