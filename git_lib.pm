@@ -111,7 +111,7 @@ sub takeCommitList {
         {
            BINARY => undef,
            FILE => $hash,
-           INDEX => "($v1.$v2)",
+           INDEX => "($v1|$v2)",
            INDEX_ADDDEL => "create",
            VALUE => $comment,
         });
