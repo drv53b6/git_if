@@ -96,7 +96,7 @@ sub gitCommit {
 #------------------------------------------------------
 sub takeCommitList {
 
-    my @list=readpipe(q{git log "--pretty=%H %s - %ar" --max-count 21});
+    my @list=readpipe(qq[git log "--pretty=%H %s - %ar" --max-count ${git_settings::select_from_last_N_states}]);
 
     my @sList=();
     for my $i (@list)
