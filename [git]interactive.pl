@@ -110,6 +110,20 @@ sub commit_cmd
     return;
 }
 #------------------------------------------------------
+# help_cmd
+#------------------------------------------------------
+sub help_cmd {
+	print <<EOF ;
+set_ver       - select working [progect state]
+diff	      - view diff between selected [progect state] and current state
+revert        - revert selected file back from the selected [progect state]
+commit        - save current state as new [progect state]
+help          - print this help
+quit          - exit
+at start [progect state] is last saved state
+EOF
+}
+#------------------------------------------------------
 # main
 #------------------------------------------------------
 sub main
@@ -123,10 +137,11 @@ sub main
                [ 'diff', \&diff_cmd, ],
                [ 'revert', \&revert_cmd, ],
                [ 'commit', \&commit_cmd, ],
+               [ 'help', \&help_cmd, ],
                [ 'quit', \&quit_cmd, ],
    );
     while (1) {
-         print "-----------------\n";
+         print "-[working progect state:]------------\n";
          system("git","show","-s",$revision);
 
          my ($it) = git_menu::list_and_choose({ PROMPT => 'What now',
