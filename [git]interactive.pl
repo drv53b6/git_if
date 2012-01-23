@@ -56,7 +56,7 @@ sub set_ver {
 #------------------------------------------------------
 sub diff_cmd {
 
-    my @mods = git_lib::takeDiffList($revision);
+    my @mods = git_lib::takeDiffList($revision,1);
 
     my @update = git_menu::list_and_choose({ PROMPT => 'diff',
     			       HEADER => "Select file:", 

@@ -122,7 +122,7 @@ sub takeCommitList {
 # takeDiffList
 #------------------------------------------------------
 sub takeDiffList {
-    my ($rev)=@_;
+    my ($rev,$flagDiff)=@_;
 
     my @list=readpipe(qq{git diff --cached --numstat $rev});
 
@@ -130,7 +130,14 @@ sub takeDiffList {
     for my $i (@list)
     {
         chomp($i);
-        my ($add,$del,$file)=split(/\s+/,$i,3);
+        my ($del,$add,$file)=split(/\s+/,$i,3);
+
+        if ($flagDiff)
+        {
+           my $tmp=$del;
+           $del=$add;
+           $add=$tmp;
+        }
 
         push(@sList,
         {
