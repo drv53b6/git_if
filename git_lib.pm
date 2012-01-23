@@ -130,7 +130,7 @@ sub takeDiffList {
     for my $i (@list)
     {
         chomp($i);
-        my ($del,$add,$file)=split(/\s+/,$i,3);
+        my ($add,$del,$file)=split(/\s+/,$i,3);
 
         push(@sList,
         {
