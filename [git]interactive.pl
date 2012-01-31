@@ -141,7 +141,7 @@ sub main
                [ 'quit', \&quit_cmd, ],
    );
     while (1) {
-         print "-[working progect state:]------------\n";
+         print "-working [progect state]:------------\n";
          system("git","show","-s",$revision);
 
          my ($it) = git_menu::list_and_choose({ PROMPT => 'What now',
