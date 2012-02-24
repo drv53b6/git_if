@@ -6,6 +6,8 @@
 
 =cut
 #------------------------------------------------------
+use File::Copy;
+
     use strict;
     use fileLib;
     use git_lib;
@@ -99,6 +101,55 @@ sub revert_cmd {
     return;
 }
 #------------------------------------------------------
+# revertSF_cmd
+#------------------------------------------------------
+sub revertSF_cmd {
+
+    my @mods = git_lib::takeDiffList($revision);
+
+    my @update = git_menu::list_and_choose({ PROMPT => 'revert',
+    			       HEADER => "Select file:", 
+    			       IMMEDIATE => 1 
+    			       },    @mods);
+
+    if (@update) {
+        print "-----------------\n";
+        my $file=$update[0]->{FILE};
+        system(qw{git diff --cached}, $revision, "--", $file);
+
+        print "revert to separate file?[y,n]\n";
+        my $ans=<STDIN>;chomp($ans);
+
+        return unless $ans eq "y";
+
+        move($file,".git/temp");
+
+        system(qw{git checkout}, $revision, "--", $file);
+
+
+        my $comment=getComment($revision);
+        my ($v1,$v2)=getVersion($comment);
+
+        my $ext;
+        if ($v1)
+        {
+           $ext=".${v1}_${v2}";
+        }
+        else
+        {
+           $ext=".$revision";
+        }
+
+        move($file,$file.$ext);
+
+        move(".git/temp",$file);
+
+
+    }
+
+    return;
+}
+#------------------------------------------------------
 # commit_cmd
 #------------------------------------------------------
 sub commit_cmd
@@ -117,6 +168,7 @@ sub help_cmd {
 set_ver       - select working [progect state]
 diff	      - view diff between selected [progect state] and current state
 revert        - revert selected file back from the selected [progect state]
+revertSW      - revert selected file to separate file
 commit        - save current state as new [progect state]
 help          - print this help
 quit          - exit
@@ -136,6 +188,7 @@ sub main
                [ 'set_ver', \&set_ver, ],
                [ 'diff', \&diff_cmd, ],
                [ 'revert', \&revert_cmd, ],
+               [ 'revertSW', \&revertSF_cmd, ],
                [ 'commit', \&commit_cmd, ],
                [ 'help', \&help_cmd, ],
                [ 'quit', \&quit_cmd, ],
