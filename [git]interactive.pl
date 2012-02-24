@@ -127,8 +127,8 @@ sub revertSF_cmd {
         system(qw{git checkout}, $revision, "--", $file);
 
 
-        my $comment=getComment($revision);
-        my ($v1,$v2)=getVersion($comment);
+        my $comment=git_lib::getComment($revision);
+        my ($v1,$v2)=git_lib::getVersion($comment);
 
         my $ext;
         if ($v1)
@@ -168,7 +168,7 @@ sub help_cmd {
 set_ver       - select working [progect state]
 diff	      - view diff between selected [progect state] and current state
 revert        - revert selected file back from the selected [progect state]
-revertSW      - revert selected file to separate file
+SFrevert      - revert selected file to separate file
 commit        - save current state as new [progect state]
 help          - print this help
 quit          - exit
@@ -188,7 +188,7 @@ sub main
                [ 'set_ver', \&set_ver, ],
                [ 'diff', \&diff_cmd, ],
                [ 'revert', \&revert_cmd, ],
-               [ 'revertSW', \&revertSF_cmd, ],
+               [ 'SFrevert', \&revertSF_cmd, ],
                [ 'commit', \&commit_cmd, ],
                [ 'help', \&help_cmd, ],
                [ 'quit', \&quit_cmd, ],
