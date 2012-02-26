@@ -133,7 +133,7 @@ sub revertSF_cmd {
         my $ext;
         if ($v1)
         {
-           $ext=".V${v1}_${v2}";
+           $ext=".V${v1}B${v2}";
         }
         else
         {
